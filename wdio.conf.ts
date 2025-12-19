@@ -47,8 +47,8 @@ export const config: WebdriverIO.Config = {
     {
       platformName: 'Android',
       'appium:automationName': 'UiAutomator2',
-      'appium:deviceName': envConfig.deviceName,
-      'appium:udid': envConfig.udid,
+      'appium:deviceName': secrets.deviceName,
+      'appium:udid': secrets.udid,
       'appium:app': envConfig.appPath,
       'appium:autoGrantPermissions': true,
       'appium:newCommandTimeout': 180,
