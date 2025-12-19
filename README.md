@@ -227,6 +227,28 @@ This framework uses **Allure Reporter** for rich, interactive test reports with 
 ### More info
 - For advanced Allure features, see the [Allure documentation](https://docs.qameta.io/allure/).
 
+## 🔍 Inspecting Android Apps with Appium Inspector
+
+To inspect and interact with your Android app UI elements, use **Appium Inspector**:
+
+### How to use Appium Inspector
+1. Download Appium Inspector from the official site: [Appium Inspector Releases](https://github.com/appium/appium-inspector/releases)
+2. Launch Appium Inspector on your machine.
+3. Start the Appium server (it runs automatically when you execute tests with this framework).
+4. In Appium Inspector, set the following desired capabilities:
+   - `platformName`: Android
+   - `deviceName`: Your device name (e.g., Samsung Galaxy S21)
+   - `app`: Path to your APK (e.g., `app/android/demo-app.apk`)
+   - `automationName`: UiAutomator2
+   - `udid`: Your device UDID (for physical devices)
+5. Click **Start Session** to begin inspecting your app.
+6. Use the Inspector to locate element selectors (accessibility id, resource-id, xpath, etc.) for your tests.
+
+### Tips
+- Make sure your device is connected and USB debugging is enabled.
+- The Appium server must be running before starting a session in Inspector.
+- You can copy selectors directly from Inspector to use in your Page Object files.
+
 ## 🤝 Contributing
 
 1. Fork the repository
