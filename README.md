@@ -99,6 +99,22 @@ capabilities: [{
 adb devices -l
 ```
 
+## 📦 Demo App APK Setup
+
+To run tests, you need the SauceLabs demo Android app APK. Download it from the official releases page:
+
+- [SauceLabs Demo App Android Releases](https://github.com/saucelabs/my-demo-app-android/releases)
+
+**Steps:**
+1. Go to the releases page above.
+2. Download the latest APK file (e.g., `Android-MyDemoApp.apk`).
+3. Place the APK in your project at:
+   ```
+   app/apk/{appname}.apk
+   ```
+   (e.g., `app/apk/Android-MyDemoApp.apk`)
+4. Update your `wdio.conf.ts` to point to the correct APK path if needed.
+
 ## 🔐 secrets.ts Configuration
 
 Some sensitive data (such as test credentials, API keys, or other secrets) should be stored in the `test/config/secrets.ts` file. This file is excluded from version control via `.gitignore` for security.
