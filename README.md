@@ -130,6 +130,7 @@ mobile-automation-appium/
 │   └── android/
 │       └── demo-app.apk          # SauceLabs demo app APK
 ├── test/
+│   ├── config/                   # Test configuration files
 │   ├── pageobjects/              # Page Object Model classes
 │   │   ├── base.page.ts         # Base page with common functionality
 │   │   ├── login.page.ts        # Login page elements and methods
@@ -139,6 +140,9 @@ mobile-automation-appium/
 │   │   └── secure.page.ts       # Products page after login
 │   └── specs/
 │       └── login.spec.ts        # Login test scenarios
+├── allure-results/      # Allure raw test results (auto-generated, not in git)
+├── allure-report/       # Allure HTML reports (auto-generated, not in git)
+├── node_modules/
 ├── .gitignore                   # Git ignore rules
 ├── package.json                 # Project dependencies and scripts
 ├── tsconfig.json               # TypeScript configuration
