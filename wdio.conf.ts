@@ -1,3 +1,5 @@
+
+import allure from '@wdio/allure-reporter';
 import { envConfig as devConfig } from './test/config/env.dev';
 import { envConfig as stagingConfig } from './test/config/env.staging';
 import { envConfig as prodConfig } from './test/config/env.prod';
@@ -28,7 +30,7 @@ export const config: WebdriverIO.Config = {
   runner: 'local',
   tsConfigPath: './tsconfig.json',
 
-  specs: ['./test/specs/*.ts'], // <-- adjust to your folder
+  specs: ['./test/specs/*.ts'],
   maxInstances: 1,
 
   logLevel: 'info',
@@ -53,7 +55,6 @@ export const config: WebdriverIO.Config = {
       'appium:autoGrantPermissions': true,
       'appium:newCommandTimeout': 180,
       'appium:ignoreHiddenApiPolicyError': true,
-      'appium:enforceXPath1': true,
       'appium:noReset': true
     }
   ],
@@ -64,8 +65,12 @@ export const config: WebdriverIO.Config = {
 
   afterTest: async function(test, context, { error, result, duration, passed, retries }) {
     if (!passed) {
-      const screenshot = await browser.takeScreenshot();
-      await browser.allure.addAttachment('Screenshot', Buffer.from(screenshot, 'base64'), 'image/png');
+      try {
+        const screenshot = await browser.takeScreenshot();
+        allure.addAttachment('Screenshot', Buffer.from(screenshot, 'base64'), 'image/png');
+      } catch (e) {
+        allure.addAttachment('Screenshot Error', String(e), 'text/plain');
+      }
     }
   }
 }
