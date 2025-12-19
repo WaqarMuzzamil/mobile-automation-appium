@@ -1,3 +1,29 @@
+import { envConfig as devConfig } from './test/config/env.dev';
+import { envConfig as stagingConfig } from './test/config/env.staging';
+import { envConfig as prodConfig } from './test/config/env.prod';
+
+import { secrets as devSecrets } from './test/config/dev.secrets';
+import { secrets as stagingSecrets } from './test/config/staging.secrets';
+import { secrets as prodSecrets } from './test/config/prod.secrets';
+
+const ENV = process.env.ENV || 'dev';
+let envConfig, secrets;
+if (ENV === 'dev') {
+  envConfig = devConfig;
+  secrets = devSecrets;
+} else if (ENV === 'staging') {
+  console.log(`Environment 'staging' is currently not implemented.`);
+  secrets = stagingSecrets;
+  process.exit(1);
+} else if (ENV === 'prod') {
+  console.log(`Environment 'prod' is currently not implemented.`);
+  secrets = prodSecrets;
+  process.exit(1);
+} else {
+  envConfig = devConfig;
+  secrets = devSecrets;
+}
+
 export const config: WebdriverIO.Config = {
   runner: 'local',
   tsConfigPath: './tsconfig.json',
@@ -21,9 +47,9 @@ export const config: WebdriverIO.Config = {
     {
       platformName: 'Android',
       'appium:automationName': 'UiAutomator2',
-      'appium:deviceName': 'Samsung Galaxy S21',
-      'appium:udid': '7e0795f6',
-      'appium:app': `${process.cwd()}/app/android/demo-app.apk`,
+      'appium:deviceName': envConfig.deviceName,
+      'appium:udid': envConfig.udid,
+      'appium:app': envConfig.appPath,
       'appium:autoGrantPermissions': true,
       'appium:newCommandTimeout': 180,
       'appium:ignoreHiddenApiPolicyError': true,

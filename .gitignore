@@ -5,7 +5,9 @@ node_modules/
 *.apk
 
 # Secrets and sensitive files
-secrets.ts
+test/config/dev.secrets.ts
+test/config/staging.secrets.ts
+test/config/prod.secrets.ts
 
 # Allure reports
 allure-results/

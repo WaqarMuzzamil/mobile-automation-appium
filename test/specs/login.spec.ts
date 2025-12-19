@@ -1,14 +1,14 @@
 import { expect } from '@wdio/globals'
 import LoginPage from '../pageobjects/login.page'
 import SecurePage from '../pageobjects/secure.page'
-import { USERNAME, PASSWORD } from '../config/secrets'
+import { secrets } from '../config/dev.secrets'
 
 describe('My Login application', () => {
     it('should login successfully with valid credentials and logout', async () => {
         // App launches on home screen, navigate to login via menu
         await LoginPage.menu.selectLoginMenuItem();
 
-        await LoginPage.login(USERNAME, PASSWORD);
+        await LoginPage.login(secrets.username, secrets.password);
         await expect(SecurePage.title).toBeExisting();
         await expect(SecurePage.title).toHaveText(
             expect.stringContaining('Products'));
@@ -32,7 +32,7 @@ describe('My Login application', () => {
         // App launches on home screen, navigate to login via menu
         await LoginPage.menu.selectLoginMenuItem();
 
-        await LoginPage.clickLoginWithUsernameOnly(USERNAME);
+        await LoginPage.clickLoginWithUsernameOnly(secrets.username);
         await expect(LoginPage.passwordError).toBeExisting();
         await expect(LoginPage.passwordError).toHaveText(
             expect.stringContaining('Enter Password'));

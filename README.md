@@ -110,10 +110,10 @@ To run tests, you need the SauceLabs demo Android app APK. Download it from the 
 2. Download the latest APK file (e.g., `Android-MyDemoApp.apk`).
 3. Place the APK in your project at:
    ```
-   app/apk/{appname}.apk
+   app/android/demo-app.apk
    ```
-   (e.g., `app/apk/Android-MyDemoApp.apk`)
-4. Update your `wdio.conf.ts` to point to the correct APK path if needed.
+   (e.g., `app/android/demo-app.apk`)
+4. The framework is pre-configured to use this path in all environments.
 
 ## 🔐 secrets.ts Configuration
 
@@ -131,6 +131,30 @@ Some sensitive data (such as test credentials, API keys, or other secrets) shoul
    };
    ```
 3. Import and use these secrets in your test files as needed.
+
+**Note:** Never commit real credentials or secrets to your repository.
+
+## 🔐 Environment-Specific Secrets
+
+Sensitive data (such as test credentials, API keys, or other secrets) should be stored in environment-specific files:
+- `test/config/dev.secrets.ts`
+- `test/config/staging.secrets.ts`
+- `test/config/prod.secrets.ts`
+
+These files are excluded from version control via `.gitignore` for security.
+
+### How to create secrets files
+1. Create the file for each environment as needed.
+2. Example structure:
+   ```typescript
+   // test/config/dev.secrets.ts
+   export const secrets = {
+     username: 'your-username',
+     password: 'your-password',
+     // Add other secrets as needed
+   };
+   ```
+3. The framework automatically loads the correct secrets file based on the environment (dev, staging, prod).
 
 **Note:** Never commit real credentials or secrets to your repository.
 
@@ -163,7 +187,7 @@ npm run wdio -- --spec test/specs/login.spec.ts
 mobile-automation-appium/
 ├── app/
 │   └── android/
-│       └── demo-app.apk          # SauceLabs demo app APK
+│       └── demo-app.apk          # SauceLabs demo app APK (used in all environments)
 ├── test/
 │   ├── config/                   # Test configuration files
 │   ├── pageobjects/              # Page Object Model classes
