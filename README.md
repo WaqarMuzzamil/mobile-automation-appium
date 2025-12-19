@@ -99,6 +99,25 @@ capabilities: [{
 adb devices -l
 ```
 
+## 🔐 secrets.ts Configuration
+
+Some sensitive data (such as test credentials, API keys, or other secrets) should be stored in the `test/config/secrets.ts` file. This file is excluded from version control via `.gitignore` for security.
+
+### How to create `secrets.ts`
+1. Create the file at `test/config/secrets.ts`.
+2. Example structure:
+   ```typescript
+   // test/config/secrets.ts
+   export const secrets = {
+     username: 'your-username',
+     password: 'your-password',
+     // Add other secrets as needed
+   };
+   ```
+3. Import and use these secrets in your test files as needed.
+
+**Note:** Never commit real credentials or secrets to your repository.
+
 ## 🧪 Running Tests
 
 ### Install Appium Globally (one-time setup):
