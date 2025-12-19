@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# Mobile app files
+*.apk
+
+# Secrets and sensitive files
+secrets.ts
