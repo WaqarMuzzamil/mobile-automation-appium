@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "wdio": "wdio run ./wdio.conf.ts"
+    "wdio": "wdio run ./wdio.conf.ts && allure generate allure-results && allure open",
+    "report": "allure generate allure-results && allure open"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^25.0.3",
+    "@wdio/allure-reporter": "^9.21.0",
     "@wdio/appium-service": "^9.21.0",
     "@wdio/cli": "^9.21.1",
     "@wdio/globals": "^9.17.0",
@@ -19,6 +21,7 @@
     "@wdio/mocha-framework": "^9.21.0",
     "@wdio/spec-reporter": "^9.20.0",
     "@wdio/visual-service": "^9.0.2",
+    "allure-commandline": "^2.36.0",
     "expect-webdriverio": "^5.5.0"
   }
 }

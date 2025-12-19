@@ -33,6 +33,13 @@ export const config: WebdriverIO.Config = {
   ],
 
   framework: 'mocha',
-  reporters: ['spec'],
-  mochaOpts: { ui: 'bdd', timeout: 60000 }
+  reporters: ['spec', ['allure', { outputDir: 'allure-results' }]],
+  mochaOpts: { ui: 'bdd', timeout: 60000 },
+
+  afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+    if (!passed) {
+      const screenshot = await browser.takeScreenshot();
+      await browser.allure.addAttachment('Screenshot', Buffer.from(screenshot, 'base64'), 'image/png');
+    }
+  }
 }

@@ -201,6 +201,32 @@ npm run wdio -- --logLevel debug
 
 WebdriverIO generates test reports automatically. Check the console output for detailed test results and any failures.
 
+## 📊 Allure Reporting
+
+This framework uses **Allure Reporter** for rich, interactive test reports with screenshots on failure.
+
+### How it works
+- After each test run, Allure results are generated automatically.
+- The report opens in your browser after tests finish.
+- Historical run data is preserved (unless you manually clean the results).
+
+### How to view reports
+- Run your tests:
+  ```bash
+  npm run wdio
+  ```
+  This will execute tests and auto-generate/open the Allure report.
+- To manually regenerate or view the report:
+  ```bash
+  npm run report
+  ```
+
+### Excluding reports from Git
+- The `.gitignore` file excludes `allure-results/` and `allure-report/` directories so reports are not committed.
+
+### More info
+- For advanced Allure features, see the [Allure documentation](https://docs.qameta.io/allure/).
+
 ## 🤝 Contributing
 
 1. Fork the repository

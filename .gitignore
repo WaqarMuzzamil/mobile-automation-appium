@@ -6,3 +6,7 @@ node_modules/
 
 # Secrets and sensitive files
 secrets.ts
+
+# Allure reports
+allure-results/
+allure-report/
