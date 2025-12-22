@@ -4,11 +4,6 @@ node_modules/
 # Mobile app files
 *.apk
 
-# Secrets and sensitive files
-test/config/dev.secrets.ts
-test/config/staging.secrets.ts
-test/config/prod.secrets.ts
-
 # Allure reports
 allure-results/
 allure-report/
