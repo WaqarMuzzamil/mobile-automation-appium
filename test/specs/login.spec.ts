@@ -1,6 +1,6 @@
 import { expect } from '@wdio/globals'
-import LoginPage from '../pageobjects/login.page'
-import SecurePage from '../pageobjects/secure.page'
+import LoginPage from '../pages/LogIn/login.page'
+import ProcuctPage from '../pages/Produts/products.page'
 import { secrets } from '../config/dev.secrets'
 
 describe('My Login application', () => {
@@ -9,8 +9,8 @@ describe('My Login application', () => {
         await LoginPage.menu.selectLoginMenuItem();
 
         await LoginPage.login(secrets.username, secrets.password);
-        await expect(SecurePage.title).toBeExisting();
-        await expect(SecurePage.title).toHaveText(
+        await expect(ProcuctPage.title).toBeExisting();
+        await expect(ProcuctPage.title).toHaveText(
             expect.stringContaining('Products'));
 
         // Logout and validate navigation back to login page

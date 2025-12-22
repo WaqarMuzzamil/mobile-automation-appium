@@ -1,18 +1,21 @@
-import { $, expect } from '@wdio/globals'
-import LogoutDialog from './logout.dialog';
+import { $ } from '@wdio/globals';
+import LogoutDialog from '../LogIn/logout.dialog';
 
-/**
- * Page object for the navigation menu
- */
+
 class MenuPage {
-    // Common menu button
+
     public get viewMenu() {
         return $('~View menu');
     }
 
     public logoutDialog = new LogoutDialog();
+
     public get webView() {
         return $('//android.widget.TextView[@text="WebView"]');
+    }
+
+    public get catalog() {
+        return $('android=new UiSelector().text("Catalog")');
     }
 
     public get qrCodeScanner() {
@@ -47,7 +50,10 @@ class MenuPage {
         return $('~Login Menu Item');
     }
 
-    // Methods for interactions
+    public get logoutMenuItem() {
+        return $('~Logout Menu Item');
+    }
+
     public async open() {
         await this.viewMenu.click();
     }
@@ -91,13 +97,15 @@ class MenuPage {
         await this.open();
         await this.virtualUsb.click();
     }
-    public get logoutMenuItem() {
-        return $('~Logout Menu Item');
-    }
 
     public async selectLoginMenuItem() {
         await this.open();
         await this.loginMenuItem.click();
+    }
+
+    public async openCatalog() {
+        await this.open();
+        await this.catalog.click();
     }
 
     public async logout() {
@@ -109,4 +117,4 @@ class MenuPage {
     }
 }
 
-export default MenuPage;
+export default new MenuPage();

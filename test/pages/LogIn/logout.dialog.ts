@@ -1,9 +1,8 @@
-import { $ } from '@wdio/globals'
 
-/**
- * Page object for the logout confirmation dialog
- */
+import { $ } from '@wdio/globals';
+
 class LogoutDialog {
+
     public get logoutDialogMessage() {
         return $('//*[@resource-id="android:id/message"]');
     }

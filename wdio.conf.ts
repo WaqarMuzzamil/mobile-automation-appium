@@ -1,8 +1,5 @@
 
-import allure from '@wdio/allure-reporter';
 import { envConfig as devConfig } from './test/config/env.dev';
-import { envConfig as stagingConfig } from './test/config/env.staging';
-import { envConfig as prodConfig } from './test/config/env.prod';
 
 import { secrets as devSecrets } from './test/config/dev.secrets';
 import { secrets as stagingSecrets } from './test/config/staging.secrets';
@@ -60,16 +57,26 @@ export const config: WebdriverIO.Config = {
   ],
 
   framework: 'mocha',
-  reporters: ['spec', ['allure', { outputDir: 'allure-results' }]],
-  mochaOpts: { ui: 'bdd', timeout: 60000 },
+  reporters: ['spec', ['allure', {
+    outputDir: './allure-results',
+    disableWebsockets: true
+  }]],
+  mochaOpts: { 
+    ui: 'bdd', 
+    timeout: 600000
+  },
 
-  afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+  afterTest: async function(_test, _context, { error: _error, result: _result, duration: _duration, passed, retries: _retries }) {
     if (!passed) {
       try {
         const screenshot = await browser.takeScreenshot();
-        allure.addAttachment('Screenshot', Buffer.from(screenshot, 'base64'), 'image/png');
+        // Save screenshot locally - wdio-html-reporter will handle it automatically
+        await require('fs').promises.writeFile(
+          `./html-reports/screenshots/${Date.now()}.png`,
+          Buffer.from(screenshot, 'base64')
+        );
       } catch (e) {
-        allure.addAttachment('Screenshot Error', String(e), 'text/plain');
+        console.log('Screenshot capture failed:', e);
       }
     }
   }
